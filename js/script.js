@@ -326,17 +326,20 @@ addClickListenersToTags();
 
 function generateAuthors() {
 
+let allAuthors = {};
+console.log(allAuthors);
+
 const articles = document.querySelectorAll(optArticleSelector);
 console.log(articles)
 
-for (let author of articles) {
+for (let article of articles) {
 
-  const wrapperAuthors = author.querySelector(optArticleAuthorSelector);
+  const wrapperAuthors = article.querySelector(optArticleAuthorSelector);
   console.log(wrapperAuthors);
 
   let html = '';
 
-  const authorTags = author.getAttribute('data-authors');
+  const authorTags = article.getAttribute('data-authors');
   console.log(authorTags);
 
   const authorHTML = '<p class="post-author">by <a href="#author-' + authorTags + '">' + authorTags + '</a></p>';
@@ -346,11 +349,11 @@ for (let author of articles) {
 
   wrapperAuthors.innerHTML = html;
 
- if(!allAuthors[tag]) {
+ if(!allAuthors[authorTags]) {
 
-    allAuthors[tag] = 1;
+    allAuthors[authorTags] = 1;
   } else {
-    allAuthors[tag]++;
+    allAuthors[authorTags]++;
   }
 
 }
@@ -364,8 +367,8 @@ console.log('tagsParams:', authorsParams);
 
 let allAuthorsHTML = '';
 
-for(let tag in allAuthors){
-allAuthorsHTML += '<p class="post-author">by <a href="#author-' + authorTags + '" class="' + optCloudClassPrefix + calculateTagClass(allAuthors[tag], tagsParams) + '">' + authorTags +' (' + allAuthors[tag] + ') ' + '</a></p>';
+for(let authorTags in allAuthors){
+allAuthorsHTML += '<li><a href="#author-' + authorTags + '">' + authorTags + ' (' + allAuthors[authorTags] + ') ' + '</a></li>';
 console.log(allAuthors);
 
 }
